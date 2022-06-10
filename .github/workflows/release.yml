@@ -1,19 +1,16 @@
-name: Build
+name: Release Workflow
 
 on:
-  pull_request:
+  release:
+    types: [created]
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        node-version: [16]
-        os: [windows-latest, ubuntu-latest]
-
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: main
       - uses: ./.github/actions/initialize
       - uses: pnpm/action-setup@v2.2.2
         with:
@@ -23,15 +20,8 @@ jobs:
           node-version: "16"
           cache: "pnpm"
       - run: pnpm i --frozen-lockfile
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Build
-        run: |
+      - run: |
           pnpm build
-        env:
-          CI: true
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
