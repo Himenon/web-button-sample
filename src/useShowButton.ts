@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
-export type Kind = "all" | "default" | "blocking" | "throttle" | "debounce";
+export type Kind = "all" | "default" | "blocking" | "throttle" | "debounce" | "transaction";
 
 export interface Query {
-  kind: "all" | "default" | "blocking" | "throttle" | "debounce";
+  kind: Kind;
 }
 
-const kinds: Kind[] = ["all", "default", "blocking", "throttle", "debounce"];
+const kinds: Kind[] = ["all", "default", "blocking", "throttle", "debounce", "transaction"];
 
 const isKind = (text: string | undefined): text is Kind => {
   return kinds.includes(text as unknown as any);
