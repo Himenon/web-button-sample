@@ -3,6 +3,7 @@ import { DefaultButton } from "./DefaultButton";
 import { BlockingButton } from "./BlockingButton";
 import { ThrottleButton } from "./ThrottleButton";
 import { DebounceButton } from "./DebounceButton";
+import { TransactionButton } from "./TransactionButton";
 import { LinearProgressWithLabel } from "./LinearWithValueLabel";
 import { useShowButton } from "./useShowButton";
 import ButtonGroup from "@mui/material/ButtonGroup";
@@ -45,7 +46,7 @@ export const App = () => {
                   text="Default"
                 />
               )}
-              {["all", "block"].includes(kind) && (
+              {["all", "blocking"].includes(kind) && (
                 <BlockingButton
                   text="Block"
                   onClick={async () => {
@@ -70,6 +71,14 @@ export const App = () => {
                     updateCount((prev) => prev + 1);
                   }}
                   timeoutMs={1000}
+                />
+              )}
+              {["all", "transaction"].includes(kind) && (
+                <TransactionButton
+                  text="Transaction"
+                  onClick={() => {
+                    updateCount((prev) => prev + 1);
+                  }}
                 />
               )}
             </ButtonGroup>
