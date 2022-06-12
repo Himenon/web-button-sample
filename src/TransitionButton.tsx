@@ -6,12 +6,12 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-export interface TransactionButtonProps {
+export interface TransitionButtonProps {
   text: string;
   onClick?: () => void;
 }
 
-export const TransactionButton: React.FC<TransactionButtonProps> = (props) => {
+export const TransitionButton: React.FC<TransitionButtonProps> = (props) => {
   const [open, setOpen] = useState(false);
   const handleOnClick = useCallback(() => {
     setOpen(true);
