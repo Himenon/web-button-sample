@@ -1,3 +1,4 @@
+import Button from "@mui/material/Button";
 import { useCallback, useRef } from "react";
 
 export interface ThrottleButtonProps {
@@ -15,5 +16,5 @@ export const ThrottleButton: React.FC<ThrottleButtonProps> = (props) => {
     }, props.timeoutMs);
     cancel.current = () => window.clearTimeout(timer);
   }, [props.onClick, props.timeoutMs]);
-  return <button onClick={throttleCallback}>{props.text}</button>;
+  return <Button  variant="outlined" onClick={throttleCallback}>{props.text}</Button>;
 };

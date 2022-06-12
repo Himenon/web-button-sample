@@ -1,3 +1,4 @@
+import Button from "@mui/material/Button";
 import { useCallback, useRef } from "react";
 
 export interface DebounceButtonProps {
@@ -18,5 +19,5 @@ export const DebounceButton: React.FC<DebounceButtonProps> = (props) => {
       processing.current = false;
     }, props.timeoutMs);
   }, [props.onClick, props.timeoutMs]);
-  return <button onClick={debounceCallback}>{props.text}</button>;
+  return <Button variant="outlined" onClick={debounceCallback}>{props.text}</Button>;
 };
