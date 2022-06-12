@@ -1,4 +1,5 @@
-import { useCallback, useRef } from "react";
+import Button from "@mui/material/Button";
+import { useCallback, useState } from "react";
 
 export interface BlockingButtonProps {
   text: string;
@@ -6,24 +7,24 @@ export interface BlockingButtonProps {
 }
 
 export const BlockingButton: React.FC<BlockingButtonProps> = (props) => {
-  const block = useRef<boolean>(false);
+  const [disabled, updateDisabled] = useState(false);
   const blockCallback = useCallback(() => {
-    if (block.current) {
+    if (disabled) {
       return;
     }
-    block.current = true;
+    updateDisabled(true);
     props
       .onClick?.()
       .then(() => {
-        block.current = false;
+        updateDisabled(false);
       })
       .catch(() => {
-        block.current = false;
+        updateDisabled(false);
       });
   }, [props.onClick]);
   return (
-    <button disabled={block.current} onClick={blockCallback}>
+    <Button  variant="outlined" disabled={disabled} onClick={blockCallback}>
       {props.text}
-    </button>
+    </Button>
   );
 };
